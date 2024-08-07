@@ -20,9 +20,9 @@ jobs:
 
     - name: Set environment variables
       run: |
-        echo "TF_VAR_pr_access_token=${{ secrets.TF_VAR_pr_access_token }}" >> $GITHUB_ENV
-        echo "TF_VAR_aws_access_key_id=${{ secrets.TF_VAR_aws_access_key_id }}" >> $GITHUB_ENV
-        echo "TF_VAR_aws_secret_access_key=${{ secrets.TF_VAR_aws_secret_access_key }}" >> $GITHUB_ENV
+        echo "TF_VAR_pr_access_token=${{ secrets.pr_access_token }}" >> $GITHUB_ENV
+        echo "TF_VAR_aws_access_key_id=${{ secrets.aws_access_key_id }}" >> $GITHUB_ENV
+        echo "TF_VAR_aws_secret_access_key=${{ secrets.aws_secret_access_key }}" >> $GITHUB_ENV
 
     - name: Run Terraform Commands
       run: |
