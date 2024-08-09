@@ -48,7 +48,6 @@ provider "aws" {
 data "aws_caller_identity" "current" {}
 
 
-# OIDC Identity Provider for GitHub Actions
 
 resource "aws_iam_openid_connect_provider" "github" {
   url = "https://token.actions.githubusercontent.com"
@@ -61,12 +60,11 @@ resource "aws_iam_openid_connect_provider" "github" {
     "6938fd4d98bab03faadb97b34396831e3780aea1"
   ]
 }
-# S3 bucket for logs
+
 resource "aws_s3_bucket" "logs_bucket" {
-  bucket = "pr-service-bucket-alex"
+  bucket = "pr-service-bucket-cp"
 }
 
-# OIDC IAM Role for GitHub Actions
 resource "aws_iam_role" "github-oidc-role" {
   name = "github-oidc-role"
   assume_role_policy = <<EOF
@@ -92,7 +90,6 @@ resource "aws_iam_role" "github-oidc-role" {
 EOF
 }
 
-# Attach a policy to the role to allow it to upload files to S3
 resource "aws_iam_role_policy" "github-oidc-role_policy" {
   name   = "github-oidc-role_policy"
   role   = aws_iam_role.github-oidc-role.id
@@ -107,7 +104,7 @@ resource "aws_iam_role_policy" "github-oidc-role_policy" {
         "s3:PutObject",
         "s3:PutObjectAcl"
       ],
-      "Resource": "arn:aws:s3:::pr-service-bucket-alex/*"
+      "Resource": "arn:aws:s3:::pr-service-bucket-cp/*"
     }
   ]
 }
